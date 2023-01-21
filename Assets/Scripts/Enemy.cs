@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using VSCodeEditor;
 
-public class Enemy : MonoBehaviour
-{
-    // Start is called before the first frame update
+public class Enemy : Entity
+{ 
+    public static List<Enemy> enemies = new List<Enemy>();
 
     static uint SpeedGradient = 7;
+     
+
+    public static Enemy Spawn(Vector3 pos)
+    {
+        Enemy e = Instantiate(GameHandler.Instance.EnemyPrefab, pos, Quaternion.identity);
+
+        enemies.Add(e);
+
+        return e;
+    }
+
     void Start()
     {
-        
+        life = 30;   
     }
 
     // Update is called once per frame
@@ -27,5 +38,10 @@ public class Enemy : MonoBehaviour
             GameHandler.Instance.Player.life -= 15;
  
         }
+    }
+
+    private void OnDestroy()
+    {
+        enemies.Remove(this);
     }
 }

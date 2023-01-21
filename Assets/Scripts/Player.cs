@@ -7,36 +7,35 @@ using UnityEngine;
 namespace VSCodeEditor
 {
      
-    public class Player : MonoBehaviour
+    public class Player : Entity
     {
 
         static uint KnifeFrameRate = 200;
         static bool SpecialMove = false;
-        public static int MaxHealth = 100;
-        public int life = MaxHealth;
+        public static uint MaxHealth = 100;
         static uint SpeedGradient = 10;
-         
+  
         void Start()
         {
-
+            life = MaxHealth;
         }
         void ThrowKnife() {
-            Enemy[] Enemies = FindObjectsOfType(typeof(Enemy)) as Enemy[];
- 
-            if (Enemies.Length > 0)
+
+            int c = Enemy.enemies.Count;
+            if (c  > 0)
             {
-                Enemy Target = Enemies[0];
+                Enemy Target = Enemy.enemies[0];
 
                 float Dist = Vector3.Distance(Target.transform.position, transform.position);
 
-                for (int i = 1; i < Enemies.Length; i++)
+                for (int i = 1; i < c; i++)
                 {
-                    float NewDist = Vector3.Distance(Enemies[i].transform.position, transform.position);
+                    float NewDist = Vector3.Distance(Enemy.enemies[i].transform.position, transform.position);
 
                     if (NewDist < Dist)
                     {
                         Dist = NewDist;
-                        Target = Enemies[i];
+                        Target = Enemy.enemies[i];
                     }
                 }
 
@@ -91,5 +90,6 @@ namespace VSCodeEditor
                 
             }
         }
+         
     }
 }

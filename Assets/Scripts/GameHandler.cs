@@ -34,8 +34,9 @@ namespace VSCodeEditor
         private void Awake()
         {
             // If there is an instance, and it's not me, delete myself.
- 
 
+ 
+ 
 
             if (Instance != null && Instance != this)
             {
@@ -76,7 +77,7 @@ namespace VSCodeEditor
                 Pos[i] *= (float)d;
             }
 
-            Instantiate(EnemyPrefab, Pos, Quaternion.identity);
+            Enemy e = Enemy.Spawn(Pos);
         }
 
         private void Update()

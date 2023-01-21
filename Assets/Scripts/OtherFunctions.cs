@@ -12,5 +12,10 @@ namespace VSCodeEditor
         {
             return Time.frameCount % Frames == 0;
         }
+
+        public static void Destroy(MonoBehaviour obj)
+        {
+            MonoBehaviour.Destroy(obj.gameObject);
+        }
     }
 }
